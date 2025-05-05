@@ -101,7 +101,7 @@ class PrettyDioLogger extends Interceptor {
       _printMapAsTable(requestHeaders, header: 'Headers');
       _printMapAsTable(extra, header: 'Extras');
     }
-    if (requestBody && options.method != 'GET') {
+    if (requestBody) {
       final dynamic data = options.data;
       if (data != null) {
         if (data is Map) _printMapAsTable(options.data as Map?, header: 'Body');
