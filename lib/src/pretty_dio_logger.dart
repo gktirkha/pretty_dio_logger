@@ -104,14 +104,17 @@ class PrettyDioLogger extends Interceptor {
     if (requestBody) {
       final dynamic data = options.data;
       if (data != null) {
-        if (data is Map) _printMapAsTable(options.data as Map?, header: 'Body');
-        if (data is FormData) {
+        if (data is Map) {
+          _printMapAsTable(options.data as Map?, header: 'Request Body');
+        } else if (data is FormData) {
           final formDataMap = <String, dynamic>{}
             ..addEntries(data.fields)
             ..addEntries(data.files);
           _printMapAsTable(formDataMap, header: 'Form data | ${data.boundary}');
         } else {
+          logPrint('╔ Unknown Form ');
           _printBlock(data.toString());
+          _printLine('╚');
         }
       }
     }
